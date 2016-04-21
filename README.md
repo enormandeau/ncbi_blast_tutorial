@@ -1,4 +1,4 @@
-# ncbi_blast_tutorial
+# Command line NCBI blast tutorial
 
 Short introduction to using NCBI blast tools from the command line
 
@@ -19,7 +19,7 @@ Get the compiled executables from this URL:
 ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 ```
 
-Decompress the archive:
+Decompress the archive. For example:
 
 ```
 tar xvfz ncbi-blast-2.3.0+-x64-linux.tar.gz
@@ -41,19 +41,59 @@ In order to test blast, you need a test fasta file. Use the following files
 that come with the tutorial:
 
 - `sequences.fasta`
-- `reference.fasta
+
+- `reference.fasta`
 
 ## Create blast database
 
+The different blast tools require a formatted database to search against. In
+order to create the database, we use the `makeblastdb` tool:
+
 ```
-makeblastdb -in reference.fasta -title reference -dbtype nucl -out reference
+makeblastdb -in reference.fasta -title reference -dbtype nucl -out databases/reference
 ```
+
+This will create a list of files in the `databases` folder. These are all part
+of the blast database.
 
 ## Blast
 
-blastn -db reference -query sequences.fasta -evalue 1e-3 -word_size 11 -outfmt 6 -max_target_seqs 1 > sequences.reference
+We can now blast our sequences against the database. In this case, both our
+query sequences and database sequences are DNA sequences, so we use the
+`blastn` tool:
+
+```
+blastn -db databases/reference -query sequences.fasta -evalue 1e-3 -word_size 11 -outfmt 6 -max_target_seqs 1 > sequences.reference
+```
 
 ## Blast with parallel
 
-time cat sequences.fasta | parallel -k --block 1k --recstart '>' --pipe 'blastn -db reference -query - -evalue 1e-3 -word_size 11 -outfmt 6 -max_target_seqs 1' > sequences.reference
+If you need to run your blasts faster (and who doesn't?), you can maximise your
+blast speed using `gnu parallel`. You will find it [at this
+link](http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2).
+
+Download the archive, extract it (with `tar xvfB parallel-latest.tar.bz2`) and
+install it with the following commands:
+
+```
+./configure
+make
+sudo make install
+```
+
+We can now use `parallel` to speed up blast:
+
+```
+time cat sequences.fasta | parallel -k --block 1k --recstart '>' --pipe 'blastn -db databases/reference -query - -evalue 1e-3 -word_size 11 -outfmt 6 -max_target_seqs 1' > sequences.reference
+```
+
+## More options and getting help
+
+## References
+
+> O. Tange (2011): GNU Parallel - The Command-Line Power Tool, ;login: The USENIX Magazine, February 2011:42-47.
+
+## Licence
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licence" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">NCBI blast tutorial</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/enormandeau/ncbi_blast_tutorial" property="cc:attributionName" rel="cc:attributionURL">Eric Normandeau</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://github.com/enormandeau/ncbi_blast_tutorial" rel="dct:source">https://github.com/enormandeau/ncbi_blast_tutorial</a>.
 
