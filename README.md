@@ -1,4 +1,4 @@
-# Command line NCBI blast tutorial
+# NCBI blast tutorial
 
 Short introduction to using NCBI blast tools from the command line
 
@@ -41,7 +41,6 @@ In order to test blast, you need a test fasta file. Use the following files
 that come with the tutorial:
 
 - `sequences.fasta`
-
 - `reference.fasta`
 
 ## Create blast database
@@ -88,6 +87,43 @@ time cat sequences.fasta | parallel -k --block 1k --recstart '>' --pipe 'blastn 
 ```
 
 ## More options and getting help
+
+If you need help to know the options and parameters you can pass `blastn` and
+the other blast+ utilities, use the `--help` option and pipe the output into
+`less`, for example:
+
+```
+blastn --help | less
+```
+
+NCBI blast tools cover more cases than DNA against DNA searches. For example,
+you can search a protein database with either DNA or protein sequences. Here is
+an exhaustive list of the programs that come with the blast+ distribution:
+
+```
+blastdb_aliastool
+blastdbcheck
+blastdbcmd
+blast_formatter
+blastn
+blastp
+blastx
+convert2blastmask
+deltablast
+dustmasker
+legacy_blast.pl
+makeblastdb
+makembindex
+makeprofiledb
+psiblast
+rpsblast
+rpstblastn
+segmasker
+tblastn
+tblastx
+update_blastdb.pl
+windowmasker
+```
 
 ## References
 
