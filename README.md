@@ -65,6 +65,25 @@ query sequences and database sequences are DNA sequences, so we use the
 blastn -db databases/reference -query sequences.fasta -evalue 1e-3 -word_size 11 -outfmt 0 > sequences.reference
 ```
 
+You can use different output formats with the `outmft` option:
+
+```
+ -outfmt <String>
+   alignment view options:
+     0 = pairwise,
+     1 = query-anchored showing identities,
+     2 = query-anchored no identities,
+     3 = flat query-anchored, show identities,
+     4 = flat query-anchored, no identities,
+     5 = XML Blast output,
+     6 = tabular,
+     7 = tabular with comment lines,
+     8 = Text ASN.1,
+     9 = Binary ASN.1,
+    10 = Comma-separated values,
+    11 = BLAST archive format (ASN.1)
+```
+
 ## Blast with parallel
 
 If you need to run your blasts faster (and who doesn't?), you can maximise your
