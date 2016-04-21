@@ -62,7 +62,7 @@ query sequences and database sequences are DNA sequences, so we use the
 `blastn` tool:
 
 ```
-blastn -db databases/reference -query sequences.fasta -evalue 1e-3 -word_size 11 -outfmt 0 -max_target_seqs 1 > sequences.reference
+blastn -db databases/reference -query sequences.fasta -evalue 1e-3 -word_size 11 -outfmt 0 > sequences.reference
 ```
 
 ## Blast with parallel
@@ -83,7 +83,7 @@ sudo make install
 We can now use `parallel` to speed up blast:
 
 ```
-time cat sequences.fasta | parallel -k --block 1k --recstart '>' --pipe 'blastn -db databases/reference -query - -evalue 1e-3 -word_size 11 -outfmt 0 -max_target_seqs 1' > sequences.reference
+time cat sequences.fasta | parallel -k --block 1k --recstart '>' --pipe 'blastn -db databases/reference -query - -evalue 1e-3 -word_size 11 -outfmt 0' > sequences.reference
 ```
 
 ## More options and getting help
