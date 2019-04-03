@@ -22,14 +22,14 @@ ftp://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/LATEST/
 Decompress the archive. For example:
 
 ```
-tar xvfz ncbi-blast-2.3.0+-x64-linux.tar.gz
+tar xvfz ncbi-blast-2.9.0+-x64-linux.tar.gz
 ```
 
 Add the `bin` folder from the extracted archive to your path. For example, add
 the following line to your `~/.bashrc` file:
 
 ```
-export PATH="/PATH/TO/ncbi-blast-2.3.0+/bin":$PATH
+export PATH="/PATH/TO/ncbi-blast-2.9.0+/bin":$PATH
 ```
 
 And change the `/PATH/TO` part to the path where you have put the extracted
