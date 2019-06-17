@@ -6,7 +6,7 @@ Short introduction to using NCBI blast tools from the command line
 
 Sometimes, you may have to use blast on your own computer to query thousands of
 sequences against a custom database of hundreds of thousands of sequences. To
-do that, you will need to install Blast on your computer, format the database
+do that, you will need to install Blast on your computer, format the database,
 and then blast the sequences.
 
 Here is a short tutorial on how to do this.
@@ -86,8 +86,8 @@ You can use different output formats with the `outmft` option:
 
 ## Blast with parallel
 
-If you need to run your blasts faster (and who doesn't?), you can maximise your
-blast speed using `gnu parallel`. You will find it [at this
+If you need to run your blasts faster (and who doesn't?), you can maximise
+CPU usage with `gnu parallel`. You will find it [at this
 link](http://ftp.gnu.org/gnu/parallel/parallel-latest.tar.bz2).
 
 Download the archive, extract it (with `tar xvfB parallel-latest.tar.bz2`) and
